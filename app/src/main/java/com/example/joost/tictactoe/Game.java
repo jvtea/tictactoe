@@ -6,10 +6,10 @@ public class Game implements Serializable {
     public static final int BOARD_SIZE = 3;
     public TileState[][] board;
 
-    private Boolean playerOneTurn;  // true if player 1's turn, false if player 2's turn
-    private int movesPlayed;
-    private Boolean gameOver;
+    // true if player 1's turn, false if player 2's turn
+    private Boolean playerOneTurn;
 
+    // initialize new game and set all TileStates to blank
     public Game() {
         board = new TileState[BOARD_SIZE][BOARD_SIZE];
         for (int i = 0; i < BOARD_SIZE; i++)
@@ -17,13 +17,13 @@ public class Game implements Serializable {
                 board[i][j] = TileState.BLANK;
 
         playerOneTurn = true;
-        gameOver = false;
     }
 
     public TileState choose(int row, int column) {
 
         TileState clickedTile = board[row][column];
 
+        // return input if player clicked empty tile, depending on which player clicked
         switch (clickedTile) {
             case CIRCLE:
                 return TileState.INVALID;
@@ -48,71 +48,88 @@ public class Game implements Serializable {
 
         int blank = BOARD_SIZE * BOARD_SIZE;
 
+        TileState winner = TileState.BLANK;
+
         // checks for horizontal winner
         for (int i = 0; i < BOARD_SIZE; i++) {
 
-            int h_circle = 0;
-            int h_cross = 0;
+            // variables to count
+            int circle = 0;
+            int cross = 0;
             for (int j = 0; j < BOARD_SIZE; j++) {
 
-
+                // count crosses and circles and count down blanks
                 switch (board[i][j]) {
                     case CROSS:
-                        h_cross += 1;
+                        cross += 1;
                         blank -= 1;
-                        //System.out.println("cross: " + h_cross);
                         break;
                     case CIRCLE:
-                        h_circle += 1;
+                        circle += 1;
                         blank -= 1;
-                        //System.out.println("circle: " + h_circle);
                         break;
                 }
             }
 
-            if (h_cross == BOARD_SIZE) {
-                //System.out.println("PLAYER ONE IS WINNER!");
+            // if 3 crosses or cirkels in row, return winner
+            if (cross == BOARD_SIZE) {
                 return GameState.PLAYER_ONE;
-            } else if (h_circle == BOARD_SIZE) {
-                //System.out.println("PLAYER TWO IS WINNER!");
+            } else if (circle == BOARD_SIZE) {
                 return GameState.PLAYER_TWO;
             }
 
         }
         // check if draw
         if (blank == 0) {
-            //System.out.println("IN PROGRESS!");
             return GameState.DRAW;
         }
 
         // checks for vertical winner
         for (int i = 0; i < BOARD_SIZE; i++) {
 
-            int h_circle = 0;
-            int h_cross = 0;
+            int circle = 0;
+            int cross = 0;
             for (int j = 0; j < BOARD_SIZE; j++) {
 
                 switch (board[j][i]) {
                     case CROSS:
-                        h_cross += 1;
+                        cross += 1;
                         blank -= 1;
-                        //System.out.println("cross: " + h_cross);
                         break;
                     case CIRCLE:
-                        h_circle += 1;
+                        circle += 1;
                         blank -= 1;
-                        //System.out.println("circle: " + h_circle);
                         break;
                 }
             }
 
-            if (h_cross == BOARD_SIZE) {
-                //System.out.println("PLAYER ONE IS WINNER!");
+            // check for diagonal winner
+            if (board[0][0] == board[1][1] &&
+                board[0][0] == board[2][2]) {
+                winner = board[0][0];
+            }
+            else if (board[0][2] == board [1][1] &&
+                    board[0][2] == board [2][0]){
+                winner = board[0][2];
+            }
+
+            // return winner
+            if (cross == BOARD_SIZE) {
                 return GameState.PLAYER_ONE;
-            } else if (h_circle == BOARD_SIZE) {
-                //System.out.println("PLAYER TWO IS WINNER!");
+            }
+            else if (circle == BOARD_SIZE) {
                 return GameState.PLAYER_TWO;
             }
+            else if (winner == TileState.CROSS) {
+                return GameState.PLAYER_ONE;
+            }
+            else if (winner == TileState.CIRCLE) {
+                return GameState.PLAYER_TWO;
+            }
+
+
+
+
 
 
         }

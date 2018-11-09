@@ -14,8 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
     Game game;
 
-
-    // BOARD_SIZE!!!
+    // arraylist to be filled with button names
     public String[][] buttons = new String[game.BOARD_SIZE][game.BOARD_SIZE];
 
 
@@ -28,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             game = new Game();
 
-            // make array list containing all buttons
+            // make array list containing all button names
             for (int i = 0; i < game.BOARD_SIZE; i++) {
                 for (int j = 0; j < game.BOARD_SIZE; j++) {
                     buttons[i][j] = "button" + i + "_" + j;
@@ -38,20 +37,17 @@ public class MainActivity extends AppCompatActivity {
         else {
             game = (Game) savedInstanceState.getSerializable("game");
 
-
-
+            // make array list containing all button names and get saved button texts
             for (int i = 0; i < game.BOARD_SIZE; i++) {
                 for (int j = 0; j < game.BOARD_SIZE; j++) {
-
-                    System.out.println("Hier nog wel!");
-                    System.out.println(game.board[i][j]);
-
                     buttons[i][j] = "button" + i + "_" + j;
 
+                    // find correct button from name in buttons array
                     String buttonId = buttons[i][j];
                     int resID = getResources().getIdentifier(buttonId, "id", getPackageName());
-
                     Button button = findViewById(resID);
+
+                    // reset button text to saved state
                     switch (game.board[i][j]) {
                         case BLANK:
                             button.setText(" ");
@@ -71,14 +67,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tileClicked (View view) {
-        int id = view.getId();
-
-        boolean flag = false;
-
 
         int row = 0;
         int column = 0;
+        int id = view.getId();
 
+        // flag to break from loop if button row and columns are set
+        boolean flag = false;
+
+
+        // loop finds corresponding button from arraylist with names
         for (int i=0; i<game.BOARD_SIZE; i++){
             if (flag) {
                 break;
@@ -97,12 +95,11 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         }
+        // use rows and columns to set tilestate
         TileState state = game.choose(row, column);
 
-        //System.out.println(state);
-
+        // find button and set text
         Button button = findViewById(id);
-
         switch(state) {
             case CROSS:
                 button.setText("X");
@@ -129,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-
+        // checks win and draw conditions and displays text accordingly
         if (game.won() == GameState.PLAYER_ONE) {
             int resID = getResources().getIdentifier("end_text", "id", getPackageName());
             TextView text = findViewById(resID);
@@ -160,7 +157,7 @@ public class MainActivity extends AppCompatActivity {
         TextView text = findViewById(resID);
         text.setText("");
 
-
+        // set all button texts to " " after reset is pressed
         for (int i = 0; i < game.BOARD_SIZE; i++) {
             for (int j = 0; j < game.BOARD_SIZE; j++) {
                 String buttonId = buttons[i][j];
@@ -169,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
                 resID = getResources().getIdentifier(buttonId, "id", getPackageName());
                 Button button = findViewById(resID);
                 button.setText(" ");
+
+                // make sure buttons are enabled after reset
                 button.setEnabled(true);
             }
         }

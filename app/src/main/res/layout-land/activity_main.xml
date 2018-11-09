@@ -10,22 +10,22 @@
     <android.support.v7.widget.GridLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="left|right"
+        android:layout_gravity="center"
         android:layout_weight="1"
         app:columnCount="3">
 
         <Button
             android:id="@+id/button0_0"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:onClick="tileClicked"
             android:text=" "
             android:textSize="30sp" />
 
         <Button
             android:id="@+id/button1_0"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:onClick="tileClicked"
             android:text=" "
             android:textSize="30sp"
@@ -34,8 +34,8 @@
 
         <Button
             android:id="@+id/button2_0"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:onClick="tileClicked"
             android:text=" "
             android:textSize="30sp"
@@ -44,8 +44,8 @@
 
         <Button
             android:id="@+id/button0_1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:onClick="tileClicked"
             android:text=" "
             android:textSize="30sp"
@@ -54,8 +54,8 @@
 
         <Button
             android:id="@+id/button1_1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:onClick="tileClicked"
             android:text=" "
             android:textSize="30sp"
@@ -64,8 +64,8 @@
 
         <Button
             android:id="@+id/button2_1"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:onClick="tileClicked"
             android:text=" "
             android:textSize="30sp"
@@ -74,8 +74,8 @@
 
         <Button
             android:id="@+id/button0_2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:onClick="tileClicked"
             android:text=" "
             android:textSize="30sp"
@@ -84,8 +84,8 @@
 
         <Button
             android:id="@+id/button1_2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:onClick="tileClicked"
             android:text=" "
             android:textSize="30sp"
@@ -94,8 +94,8 @@
 
         <Button
             android:id="@+id/button2_2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
             android:onClick="tileClicked"
             android:text=" "
             android:textSize="30sp"
@@ -116,8 +116,8 @@
     <Button
         android:id="@+id/button_new_game"
         android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right|center_vertical"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
         android:onClick="resetClicked"
         android:text="New Game" />
 
